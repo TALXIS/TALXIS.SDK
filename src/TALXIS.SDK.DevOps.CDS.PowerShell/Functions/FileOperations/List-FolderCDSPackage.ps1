@@ -20,4 +20,6 @@ function List-FolderCDSPackage {
             [void]$packageList.Add($packageAssemblyName)
         }
     }
+
+    return $packageList
 }
