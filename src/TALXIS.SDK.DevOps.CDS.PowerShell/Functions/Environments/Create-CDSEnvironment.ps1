@@ -38,7 +38,6 @@ function Create-CDSEnvironment {
         Return
     }
     
-    Write-Host $newEnvironmentDb
     
     $domainName = $newEnvironmentDb.DisplayName.Substring($newEnvironmentDb.DisplayName.IndexOf("(")+1).Trim(")")
     

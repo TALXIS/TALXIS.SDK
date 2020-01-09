@@ -1,4 +1,4 @@
 function SelectLocal-CDSPackage {
     $folder = Select-CDSBuildFolder
-    $packagesInFolder = List-ColderCDSPackage $folder | Where-Object {$_.FullName}
+    $packagesInFolder = List-FolderCDSPackage $folder | Where-Object {$_.FullName}
 }
