@@ -11,7 +11,7 @@
     Verify-CDSConnection
 
     if(!$SolutionZipPath) {
-        $SolutionZipPath = SelectLocal-CDSSolution
+        $SolutionZipPath = Select-LocalCDSSolution
     }
 
     $Managed = ($SolutionZipPath -like '*_managed*') 

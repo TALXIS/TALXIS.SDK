@@ -17,5 +17,4 @@ function Install-PowerShellModule {
         Write-Host "Found module already installed, nothing to do."
     }
     Import-Module $savedModulePath -Global
-    #Set-VstsTaskVariable PowerAppsTools_$($ModuleName.Replace('.','_')) $savedModulePath
 }

@@ -1,23 +1,12 @@
 function Start-PackageImportScenario {
-    $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'White')
-    $Host.UI.RawUI.ForegroundColor = 'DarkBlue'
-    write-host "`n"
-    write-host "`n"
-    Write-host "   _______       _     __   _______  _____ " 
-    Write-host "  |__   __|/\   | |    \ \ / /_   _|/ ____|"
-    Write-host "     | |  /  \  | |     \ V /  | | | (___  "
-    Write-host "     | | / /\ \ | |      > <   | |  \___ \ "
-    Write-host "     | |/ ____ \| |____ / . \ _| |_ ____) |"
-    Write-host "     |_/_/    \_\______/_/ \_\_____|_____/"
-    write-host "`n"
-    write-host "`n"
+    Start-WelcomeScenario
     
     Write-host "Welcome to a scenario of PACKAGE IMPORT."
-    Write-host "This will halp you to go through the process of setting up your own evironment to play around."
+    Write-host "This will help you to go through the process of setting up your own evironment to play around."
     write-host "`n"
     write-host "__________________________________________________________________"
     write-host "`n"
-    Write-host "We will start with your personal development environment seletion."
+    Write-host "We will start with your personal development environment selection."
     Start-Sleep -Second 3
     write-host "`n"
     Write-host "Please sign in with your work account."
@@ -29,7 +18,7 @@ function Start-PackageImportScenario {
     Start-Sleep -Second 1
     write-host "`n"
     $env = Get-CurrentBranchEnvironment
-    write-host "Great! We got the environment ready ..."
+    write-host "Great! We've got the environment ready ..."
     Start-Sleep -Second 3
     write-host "`n"
     Write-host "Now we need to get a package from your solution. We will be looking at your current directory."

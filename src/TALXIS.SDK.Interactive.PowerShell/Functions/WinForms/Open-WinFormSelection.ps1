@@ -1,13 +1,13 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-function Select-CDSSolution {
+function Open-WinFormSelection {
     param (
-        [string[]]$solutions
+        [string[]]$options
     )
 
     $form = New-Object System.Windows.Forms.Form
-    $form.Text = 'Select a solution from the build folder'
+    $form.Text = 'Select an option'
     $form.Size = New-Object System.Drawing.Size(600,600)
     $form.StartPosition = 'CenterScreen'
 
@@ -38,7 +38,7 @@ function Select-CDSSolution {
     $listBox.Size = New-Object System.Drawing.Size(560,580)
     $listBox.Height = 480
 
-    $solutions | Foreach-Object { [void] $listBox.Items.Add($_) }
+    $options | Foreach-Object { [void] $listBox.Items.Add($_) }
 
     $form.Controls.Add($listBox)
 
