@@ -31,6 +31,11 @@ function Start-PackageImportScenario {
     $importConfigPath = Get-ChildItem -Path $folderPath -Filter "src\CDSPackages\$packageName\PkgFolder\ImportConfig.xml"
     write-host "`n"
     write-host "`n"
-    Import-CDSPackage -ImportConfigPath $importConfigPath.FullName -BuildFolderPath ".\build" -EnvId $env.EnvironmentName
 
+    $StopWatch = New-Object -TypeName System.Diagnostics.Stopwatch 
+    Import-CDSPackage -ImportConfigPath $importConfigPath.FullName -BuildFolderPath ".\build" -EnvId $env.EnvironmentName
+    write-host "`n"
+    write-host "`n"
+    $StopWatch.Stop()
+    write-host "Elapsed time $($StopWatch.Elapsed.ToString())"
 }

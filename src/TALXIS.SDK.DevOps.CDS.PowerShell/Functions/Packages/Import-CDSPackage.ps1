@@ -2,10 +2,10 @@ function Import-CDSPackage {
     param (
         [string]$ImportConfigPath,
         [string]$BuildFolderPath,
-        [string]$EnvID
+        [string]$EnvId
     )
     
-    $env = Select-CDSEnvironment $EnvID
+    $env = Select-CDSEnvironment $EnvId
     $domainName = $env.DisplayName.Substring($env.DisplayName.IndexOf("(")+1).Trim(")")
     $domain = "https://$domainName.crm4.dynamics.com"
 

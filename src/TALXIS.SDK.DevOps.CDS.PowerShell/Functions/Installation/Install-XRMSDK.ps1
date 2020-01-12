@@ -97,6 +97,7 @@ function Install-XRMSDK {
     else {
         Install-EmbeddedModules -ModuleName "Microsoft.Xrm.WebApi.PowerShell" -ModulesFolder $ToolsFolder
     }
+    Import-Module $webApiFolder -Global
 
 }
 
