@@ -1,14 +1,29 @@
 function Start-WelcomeScenario {
-    $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'White')
-    $Host.UI.RawUI.ForegroundColor = 'DarkBlue'
+    #$Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'White')
+    #$Host.UI.RawUI.ForegroundColor = 'DarkBlue'
     write-host "`n"
-    write-host "`n"
-    Write-host "   _______       _     __   _______  _____ " 
-    Write-host "  |__   __|/\   | |    \ \ / /_   _|/ ____|"
-    Write-host "     | |  /  \  | |     \ V /  | | | (___  "
-    Write-host "     | | / /\ \ | |      > <   | |  \___ \ "
-    Write-host "     | |/ ____ \| |____ / . \ _| |_ ____) |"
-    Write-host "     |_/_/    \_\______/_/ \_\_____|_____/"
-    write-host "`n"
-    write-host "`n"
+    Write-host "===========================================================================================================" 
+    Write-host "||                          _   _ ______ _________          ______  _____   _____                        ||"
+    Write-host "||                         | \ | |  ____|__   __\ \        / / __ \|  __ \ / ____|                       ||"
+    Write-host "||                         |  \| | |__     | |   \ \  /\  / / |  | | |__) | |  __                        ||"
+    Write-host "||                         | . `  |  __|    | |    \ \/  \/ /| |  | |  _  /| | |_ |                       ||"
+    Write-host "||                         | |\  | |____   | |     \  /\  / | |__| | | \ \| |__| |                       ||"
+    Write-host "||                         |_| \_|______|  |_|      \/  \/   \____/|_|  \_\\_____|                       ||"
+    Write-host "||                                                                                                       ||"
+    Write-host "||                                                 PRESENTS                                              ||"
+    Write-host "||                                                                                                       ||"
+    Start-Sleep -Second 2
+    Write-host "||   ______             _                      _                   _                 _                   ||"
+    Write-host "||  |  ____|           (_)                    ( )         /\      | |               | |                  ||"
+    Write-host "||  | |__   _ __   __ _ _ _ __   ___  ___ _ __|/ ___     /  \   __| |_   _____ _ __ | |_ _   _ _ __ ___  ||"
+    Write-host "||  |  __| | '_ \ / _ ` | | '_ \ / _ \/ _ \ '__| / __|   / /\ \ / _`  \ \ / / _ \ '_ \| __| | | | '__/ _ \ ||"
+    Write-host "||  | |____| | | | (_| | | | | |  __/  __/ |    \__ \  / ____ \ (_| |\ V /  __/ | | | |_| |_| | |  | __/ ||"
+    Write-host "||  |______|_| |_|\__, |_|_| |_|\___|\___|_|    |___/ /_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___| ||"
+    Write-host "||                 __/ |                                                                                 ||"
+    Write-host "||                |___/                                                                                  ||"
+    Write-host "||                                                                                                       ||"
+    Write-host "||                                    CHAPTER I: SOLUTION DEVELOPMENT                                    ||"
+    Write-host "||                                                                                                       ||" 
+    Write-host "==========================================================================================================="                                                              
+    Write-host "`n"  
 }
