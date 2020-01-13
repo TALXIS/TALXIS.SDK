@@ -1,5 +1,4 @@
-function Select
--OnlineCDSSolution {
+function Select-OnlineCDSSolution {
     Verify-CDSConnection
     
 }
