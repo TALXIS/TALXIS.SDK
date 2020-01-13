@@ -33,6 +33,7 @@ function Start-PackageImportScenario {
     write-host "`n"
 
     $StopWatch = New-Object -TypeName System.Diagnostics.Stopwatch 
+    $StopWatch.Start()
     Import-CDSPackage -ImportConfigPath $importConfigPath.FullName -BuildFolderPath ".\build" -EnvId $env.EnvironmentName
     write-host "`n"
     write-host "`n"

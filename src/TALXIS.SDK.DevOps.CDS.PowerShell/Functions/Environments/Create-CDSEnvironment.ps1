@@ -54,6 +54,8 @@ function Create-CDSEnvironment {
 
     
     Write-Host "SUCCESS - $($domainName) is provisioned"
+
+    return $env
 }
 
 
