@@ -11,13 +11,13 @@ function Start-PackageImportScenario {
     write-host "`n"
     Write-host "Please sign in with your work account."
     Start-Sleep -Second 1
+    
     Set-AADAccount
     write-host "`n"
     write-host "`n"
     Write-host "Welcome $($global:currentSession.upn)!"
-    Start-Sleep -Second 1
-    write-host "`n"
-    $env = Get-CurrentBranchEnvironment
+    
+    Start-DevEnvSetupScenario
     write-host "Great! We've got the environment ready ..."
     Start-Sleep -Second 3
     write-host "`n"
@@ -34,7 +34,7 @@ function Start-PackageImportScenario {
 
     $StopWatch = New-Object -TypeName System.Diagnostics.Stopwatch 
     $StopWatch.Start()
-    Import-CDSPackage -ImportConfigPath $importConfigPath.FullName -BuildFolderPath ".\build" -EnvId $env.EnvironmentName
+    Import-CDSPackage -ImportConfigPath $importConfigPath.FullName -BuildFolderPath ".\build" -EnvId $global:currentEnvironment.EnvironmentName
     write-host "`n"
     write-host "`n"
     $StopWatch.Stop()
