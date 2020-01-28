@@ -1,5 +1,5 @@
 function Install-PowerPlatformSDK {
-    $global:powerPlatformSdkPath = Path.Combine($workingDirPath, "PowerPlatformSDK");
+    $global:powerPlatformSdkPath = Join-Path -Path $workingDirPath -ChildPath "PowerPlatformSDK"
     New-Item $powerPlatformSdkPath -ItemType Directory -Force | Out-Null
     Write-host "tools folder: $powerPlatformSdkPath"
 
