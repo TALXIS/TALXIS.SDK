@@ -8,7 +8,7 @@ function Get-AADCertificateAssertion {
     )
 
     #Find certificate and prepare credentials
-    if ([string]::IsNullOrEmpty($CertificateThumbprint) = = false) {
+    if ([string]::IsNullOrEmpty($CertificateThumbprint) -eq $false) {
         
         $storeName = [StoreName]::My
         $storeLocation = [StoreLocation]::CurrentUser #or LocalMachine

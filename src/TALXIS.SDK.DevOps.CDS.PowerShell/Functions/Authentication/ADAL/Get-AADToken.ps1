@@ -4,12 +4,21 @@ function Get-AADToken {
     [CmdletBinding()]
     param
     (
-        [string] $Audience = "https://management.azure.com/",
-        [string] $ClientId = "1950a258-227b-4e31-a9cf-717495945fc2",
-        [string] $RedirectUri = "urn:ietf:wg:oauth:2.0:oob",
+        [string] $Audience,
+        [string] $ClientId,
+        [string] $RedirectUri,
         [string] $CertificateThumbprint
     )
 
+    if ([string]::IsNullOrEmpty($Audience) -eq $false) {
+        $Audience = "https://management.azure.com/"
+    }
+    if ([string]::IsNullOrEmpty($ClientId) -eq $false) {
+        $ClientId = "1950a258-227b-4e31-a9cf-717495945fc2"
+    }
+    if ([string]::IsNullOrEmpty($RedirectUri) -eq $false) {
+        $RedirectUri = "urn:ietf:wg:oauth:2.0:oob"
+    }
        
 
     # Reuse TokenCache from Microsoft.Xrm.Tooling.CrmConnector with vache file path from Microsoft.Xrm.WebApi.PowerShell to prevent multiple prompts
@@ -29,7 +38,7 @@ function Get-AADToken {
     if ($global:currentSession.loggedIn -eq $false -or $global:currentSession.expiresOn -lt (Get-Date)) {
         Write-Host "No user logged in. Signing the user in before acquiring token."
         
-        $authResult = Acquire-AADToken $Audience $ClientId $RedirectUri $CertificateThumbprint [Microsoft.IdentityModel.Clients.ActiveDirectory.PromptBehavior]::SelectAccount $tokenCache
+        $authResult = Acquire-AADToken $Audience $ClientId $RedirectUri $CertificateThumbprint SelectAccount $tokenCache
 
         $claims = Get-TokenClaims -JwtToken $authResult.IdToken
 
@@ -64,7 +73,7 @@ function Get-AADToken {
 
         Write-Verbose "Token for $Audience is either missing or expired. Acquiring a new one."
         
-        $authResult = Acquire-AADToken $Audience $ClientId $RedirectUri $CertificateThumbprint [Microsoft.IdentityModel.Clients.ActiveDirectory.PromptBehavior]::Auto $tokenCache
+        $authResult = Acquire-AADToken $Audience $ClientId $RedirectUri $CertificateThumbprint Auto $tokenCache
         
         $global:currentSession.resourceTokens[$Audience] = @{
             accessToken = $authResult.AccessToken;

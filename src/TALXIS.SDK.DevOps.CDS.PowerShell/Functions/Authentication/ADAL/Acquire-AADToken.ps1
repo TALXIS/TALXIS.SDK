@@ -12,7 +12,7 @@ function Acquire-AADToken {
 
     $authContext = New-Object Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext("https://login.windows.net/common", $tokenCache);
 
-    if ([string]::IsNullOrEmpty($CertificateThumbprint) = = false) {
+    if ([string]::IsNullOrEmpty($CertificateThumbprint) -eq $false) {
         $certAssertion = Get-AADCertificateAssertion -CertificateThumbprint $CertificateThumbprint -ClientId $ClientId
         return $authContext.AcquireTokenAsync($Audience, $certAssertion).GetAwaiter().GetResult();
     }
