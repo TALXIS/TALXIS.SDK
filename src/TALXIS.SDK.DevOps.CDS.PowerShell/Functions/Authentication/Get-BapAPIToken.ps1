@@ -7,7 +7,7 @@ function Get-BapAPIToken {
         [string] $RedirectUri,
         [string] $CertificateThumbprint
     )
-    if ([string]::IsNullOrEmpty($Audience) -eq $false) {
+    if ([string]::IsNullOrEmpty($Audience) -eq $true) {
         $Audience = "https://api.bap.microsoft.com/"
     }
     return Get-AADToken -Audience $Audience -ClientId $ClientId -RedirectUri $RedirectUri -CertificateThumbprint $CertificateThumbprint

@@ -7,7 +7,7 @@ function Get-PowerAppsServiceToken {
         [string] $RedirectUri,
         [string] $CertificateThumbprint
     )
-    if ([string]::IsNullOrEmpty($Audience) -eq $false) {
+    if ([string]::IsNullOrEmpty($Audience) -eq $true) {
         $Audience = "https://service.powerapps.com/"
     }
     return Get-AADToken -Audience $Audience -ClientId $ClientId -RedirectUri $RedirectUri -CertificateThumbprint $CertificateThumbprint

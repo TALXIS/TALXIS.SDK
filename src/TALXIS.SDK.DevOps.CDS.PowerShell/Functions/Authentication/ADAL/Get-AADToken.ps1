@@ -10,13 +10,13 @@ function Get-AADToken {
         [string] $CertificateThumbprint
     )
 
-    if ([string]::IsNullOrEmpty($Audience) -eq $false) {
+    if ([string]::IsNullOrEmpty($Audience) -eq $true) {
         $Audience = "https://management.azure.com/"
     }
-    if ([string]::IsNullOrEmpty($ClientId) -eq $false) {
+    if ([string]::IsNullOrEmpty($ClientId) -eq $true) {
         $ClientId = "1950a258-227b-4e31-a9cf-717495945fc2"
     }
-    if ([string]::IsNullOrEmpty($RedirectUri) -eq $false) {
+    if ([string]::IsNullOrEmpty($RedirectUri) -eq $true) {
         $RedirectUri = "urn:ietf:wg:oauth:2.0:oob"
     }
        
