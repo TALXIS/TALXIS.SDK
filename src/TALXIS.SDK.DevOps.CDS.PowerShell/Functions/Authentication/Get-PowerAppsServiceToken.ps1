@@ -1,4 +1,11 @@
 function Get-PowerAppsServiceToken {
-    $Audience = "https://service.powerapps.com/"
-    return Get-AADToken -Audience $Audience
+    [CmdletBinding()]
+    param
+    (
+        [string] $Audience = "https://service.powerapps.com/",
+        [string] $ClientId,
+        [string] $RedirectUri,
+        [string] $CertificateThumbprint
+    )
+    return Get-AADToken -Audience $Audience -ClientId $ClientId -RedirectUri $RedirectUri -CertificateThumbprint $CertificateThumbprint
 }

@@ -19,6 +19,7 @@ function Import-CDSPackage {
 
         Write-host "Importing $($solutionFile.FullName) ..."
         $cred = Get-WebApiPSCredential
+        # Import-Solution is from 
         Import-Solution -ApiUrl $domain `
                         -Credential $cred -SolutionInputFile $solutionFile.FullName `
                         -HoldingSolution $false `

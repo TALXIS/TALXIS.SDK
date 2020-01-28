@@ -1,16 +1,25 @@
+
+
 function Get-AADToken {
     [CmdletBinding()]
     param
     (
         [string] $Audience = "https://management.azure.com/",
         [string] $ClientId = "1950a258-227b-4e31-a9cf-717495945fc2",
-        [string] $RedirectUri = "urn:ietf:wg:oauth:2.0:oob"
+        [string] $RedirectUri = "urn:ietf:wg:oauth:2.0:oob",
+        [string] $CertificateThumbprint
     )
 
-    $authContext = New-Object Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext("https://login.windows.net/common");
-    $authParameters = New-Object -TypeName Microsoft.IdentityModel.Clients.ActiveDirectory.PlatformParameters -ArgumentList ([Microsoft.IdentityModel.Clients.ActiveDirectory.PromptBehavior]::SelectAccount);
+       
 
+    # Reuse TokenCache from Microsoft.Xrm.Tooling.CrmConnector with vache file path from Microsoft.Xrm.WebApi.PowerShell to prevent multiple prompts
+    Add-Type -Path (Join-Path -Path $powerPlatformSdkPath -ChildPath "Microsoft.Xrm.Tooling.CrmConnector.PowerShell\Microsoft.Xrm.Tooling.Connector.dll")
+    $localAppDataPath = [Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)
+    $tokenCachePath = Join-Path -Path (Join-Path -Path $localAppDataPath -ChildPath "Microsoft") -ChildPath ("PowerApp.BuildTools")
+    $tokenCacheType = [Microsoft.Xrm.Tooling.Connector.CrmServiceClient].Assembly.GetType("Microsoft.Xrm.Tooling.Connector.CrmServiceClientTokenCache")
+    $tokenCache = $tokenCacheType.GetConstructors()[0].Invoke(@([string]$tokenCachePath))
 
+    # Initialize current session storage
     if ($null -eq $global:currentSession) {
         $global:currentSession = @{
             loggedIn = $false;
@@ -20,11 +29,11 @@ function Get-AADToken {
     if ($global:currentSession.loggedIn -eq $false -or $global:currentSession.expiresOn -lt (Get-Date)) {
         Write-Host "No user logged in. Signing the user in before acquiring token."
         
-        $authResult = $authContext.AcquireTokenAsync($Audience, $ClientId, $RedirectUri, $authParameters).GetAwaiter().GetResult();
+        $authResult = Acquire-AADToken $Audience $ClientId $RedirectUri $CertificateThumbprint [Microsoft.IdentityModel.Clients.ActiveDirectory.PromptBehavior]::SelectAccount $tokenCache
 
         $claims = Get-TokenClaims -JwtToken $authResult.IdToken
 
-        #This variable and it's structure is the same as in Microsoft.PowerApps.Administration.PowerShell to keep compatibility
+        # This variable and it's structure is the same as in Microsoft.PowerApps.Administration.PowerShell to keep compatibility with OOB CLI tools
         $global:currentSession = @{
             loggedIn            = $true;
             idToken             = $authResult.IdToken;
@@ -48,16 +57,14 @@ function Get-AADToken {
 
     }
 
-    if ($global:currentSession.resourceTokens[$Audience] -eq $null -or `
-            $global:currentSession.resourceTokens[$Audience].accessToken -eq $null -or `
-            $global:currentSession.resourceTokens[$Audience].expiresOn -eq $null -or `
+    if ($null -eq $global:currentSession.resourceTokens[$Audience] -or `
+            $null -eq $global:currentSession.resourceTokens[$Audience].accessToken -or `
+            $null -eq $global:currentSession.resourceTokens[$Audience].expiresOn -or `
             $global:currentSession.resourceTokens[$Audience].expiresOn -lt (Get-Date)) {
 
         Write-Verbose "Token for $Audience is either missing or expired. Acquiring a new one."
         
-        $authParameters = New-Object -TypeName Microsoft.IdentityModel.Clients.ActiveDirectory.PlatformParameters -ArgumentList ([Microsoft.IdentityModel.Clients.ActiveDirectory.PromptBehavior]::Auto);
-        $authResult = $authContext.AcquireTokenAsync($Audience, $ClientId, $RedirectUri, $authParameters).GetAwaiter().GetResult();
-
+        $authResult = Acquire-AADToken $Audience $ClientId $RedirectUri $CertificateThumbprint [Microsoft.IdentityModel.Clients.ActiveDirectory.PromptBehavior]::Auto $tokenCache
         
         $global:currentSession.resourceTokens[$Audience] = @{
             accessToken = $authResult.AccessToken;

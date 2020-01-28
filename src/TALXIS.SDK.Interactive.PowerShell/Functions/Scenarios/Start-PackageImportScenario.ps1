@@ -12,7 +12,7 @@ function Start-PackageImportScenario {
     Write-host "Please sign in with your work account."
     Start-Sleep -Second 1
     
-    Set-AADAccount
+    Authenticate-AAD
     write-host "`n"
     write-host "`n"
     Write-host "Welcome $($global:currentSession.upn)!"

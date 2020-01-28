@@ -69,8 +69,11 @@
     'Remove-CDSEnvironment',
     'Reset-CDSEnvironment',
     'Select-CDSEnvironment',
-    'Set-AADAccount',
-    'Import-CDSPackage'
+    'Authenticate-AAD',
+    'Import-CDSPackage',
+    'Get-CurrentBranchEnvironment',
+    'Open-CDSEnvironment',
+    'List-FolderCDSPackage'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport   = @()
